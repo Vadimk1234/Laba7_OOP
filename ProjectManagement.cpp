@@ -16,6 +16,28 @@ bool Budget::allocateFunds(double amount) {
 
 void Budget::reset() { spentAmount = 0.0; }
 
+Budget& Budget::operator++() {
+    totalLimit += 100.0;
+    return *this;
+}
+
+Budget Budget::operator++(int) {
+    Budget temp = *this;
+    totalLimit += 100.0;
+    return temp;
+}
+
+Budget& Budget::operator--() {
+    totalLimit -= 100.0;
+    return *this;
+}
+
+Budget Budget::operator--(int) {
+    Budget temp = *this;
+    totalLimit -= 100.0;
+    return temp;
+}
+
 Employee::Employee(const std::string& empName, double initialBudget)
     : name(empName), budget(initialBudget) {
 }

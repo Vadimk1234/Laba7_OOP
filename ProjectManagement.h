@@ -2,7 +2,6 @@
 #ifndef PROJECT_MANAGEMENT_H
 #define PROJECT_MANAGEMENT_H
 
-#include <iostream>
 #include <string>
 #include <vector>
 
@@ -17,6 +16,11 @@ public:
     double getSpentAmount() const;
     bool allocateFunds(double amount);
     void reset();
+
+    Budget& operator++();
+    Budget operator++(int);
+    Budget& operator--();
+    Budget operator--(int);
 };
 
 class Employee {
@@ -27,8 +31,10 @@ protected:
 public:
     Employee(const std::string& empName, double initialBudget);
     virtual ~Employee() = default;
+
     virtual void performWork() = 0;
     virtual void reportStatus() const;
+
     std::string getName() const;
     Budget& getBudget();
 };
@@ -55,6 +61,7 @@ public:
     void performWork() override;
     void reportStatus() const override;
 };
+
 class ProjectManager : public Employee {
 private:
     std::vector<Employee*> subordinates;
@@ -67,4 +74,4 @@ public:
     void reportStatus() const override;
 };
 
-#endif PROJECT_MANAGEMENT_H
+#endif // PROJECT_MANAGEMENT_H
